@@ -1,0 +1,53 @@
+service: yuavahve
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-southeast-1
+
+functions:
+  joinFamily:
+    handler: src/family/join.joinFamily
+    events:
+      - httpApi:
+          path: /families/{id}
+          method: get
+  createFamily:
+    handler: src/family/create.createFamily
+    events:
+      - httpApi:
+          path: /families/createFamily
+          method: post
+
+resources:
+  Resources:
+    familyTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: familyTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+
+custom:
+  tableName: familyTable
+  dynamodb:
+    stages:
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+    migration:
+      dir: offline/migrations
+
+plugins:
+  - serverless-offline
+  - serverless-dynamodb-local
