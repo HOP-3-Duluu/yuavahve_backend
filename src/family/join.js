@@ -1,11 +1,14 @@
-import { marshall } from "@aws-sdk/util-dynamodb";
-import { db } from "../library/dynamodb";
+const { marshall } = require("@aws-sdk/util-dynamodb");
+const db = require("../library/dynamodb");
 
 module.exports.joinFamily = async (event) => {
   try {
     const { Item: item } = await db.getItem({
       TableName: "familyTable",
-      Key: marshall({ id: event.pathParameters.id }),
+      Key: marshall(
+        { id: event.pathParameters.id },
+        { removeUndefinedValues: true }
+      ),
     });
 
     return {

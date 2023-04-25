@@ -1,3 +1,4 @@
+const { marshall } = require("@aws-sdk/util-dynamodb");
 const db = require("../library/dynamodb");
 
 module.exports.createFamily = async (event) => {
@@ -6,10 +7,13 @@ module.exports.createFamily = async (event) => {
     const familyName = event.params && event.params?.name;
     const res = await db.putItem({
       TableName: "familyTable",
-      Item: {
-        id: id,
-        familyName: familyName,
-      },
+      Item: marshall(
+        {
+          id: id,
+          familyName: familyName,
+        },
+        { removeUndefinedValues: true }
+      ),
     });
     console.log("Item added:", res);
     return {

@@ -12,6 +12,7 @@
     "@aws-sdk/client-dynamodb": "^3.316.0",
     "@aws-sdk/util-dynamodb": "^3.316.0",
     "aws-sdk": "^2.1361.0",
+    "awscred": "^1.5.0",
     "serverless-dynamodb-local": "^0.2.40"
   }
 }
