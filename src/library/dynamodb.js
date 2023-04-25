@@ -1,11 +1,8 @@
-import { DynamoDB } from "@aws-sdk/client-dynamodb";
+const { DynamoDB } = require("@aws-sdk/client-dynamodb");
 
-let options = {};
-if (process.env.IS_OFFLINE) {
-  options = {
-    region: "localhost",
-    endpoint: "http://localhost:8000",
-  };
-}
+const db = new DynamoDB({
+  region: "localhost",
+  endpoint: "http://localhost:8000",
+});
 
-export const db = new DynamoDB(options);
+module.exports = db;

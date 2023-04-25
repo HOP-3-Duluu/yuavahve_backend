@@ -5,19 +5,26 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: ap-southeast-1
+  environment:
+    familyTable: ${self:custom.tableName}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: "*"
 
 functions:
   joinFamily:
     handler: src/family/join.joinFamily
     events:
       - httpApi:
-          path: /families/{id}
+          path: /family/{id}
           method: get
   createFamily:
     handler: src/family/create.createFamily
     events:
       - httpApi:
-          path: /families/createFamily
+          path: /family/create
           method: post
 
 resources:
@@ -44,9 +51,12 @@ custom:
     start:
       port: 8000
       inMemory: true
+      heapInitial: 200m
       migrate: true
     migration:
       dir: offline/migrations
+    serverless-offline:
+      resourceRoutes: true
 
 plugins:
   - serverless-offline

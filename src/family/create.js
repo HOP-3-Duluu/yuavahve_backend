@@ -1,29 +1,29 @@
-import { marshall } from "@aws-sdk/util-dynamodb";
-import { db } from "../library/dynamodb";
-const crypto = require("crypto");
+const db = require("../library/dynamodb");
 
 module.exports.createFamily = async (event) => {
-  const id = crypto.randomBytes(16).toString("hex");
+  const id = require("crypto").randomBytes(16).toString("hex");
   try {
+    const familyName = event.params && event.params?.name;
     const res = await db.putItem({
       TableName: "familyTable",
-      Item: marshall({
+      Item: {
         id: id,
-        familyName: event.params.name,
-      }),
+        familyName: familyName,
+      },
     });
-
+    console.log("Item added:", res);
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: res,
+        message: "Item added",
       }),
     };
   } catch (e) {
+    console.error("Error:", e);
     return {
       statusCode: 400,
       body: JSON.stringify({
-        message: "unsupported",
+        message: "Error adding item",
       }),
     };
   }
