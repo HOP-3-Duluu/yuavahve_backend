@@ -5,13 +5,13 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: ap-southeast-1
-  environment:
-    familyTable: ${self:custom.tableName}
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:*
-      Resource: "*"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:*
+          Resource: "*"
 
 functions:
   joinFamily:
@@ -36,9 +36,13 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
+          - AttributeName: name
+            AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+          - AttributeName: name
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1

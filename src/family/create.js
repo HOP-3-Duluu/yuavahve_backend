@@ -3,19 +3,23 @@ const db = require("../library/dynamodb");
 
 module.exports.createFamily = async (event) => {
   const id = require("crypto").randomBytes(16).toString("hex");
+
+  console.log(event.queryStringParameters.name);
+
   try {
-    const familyName = event.params && event.params?.name;
     const res = await db.putItem({
       TableName: "familyTable",
       Item: marshall(
         {
           id: id,
-          familyName: familyName,
+          name: event.queryStringParameters?.name,
         },
         { removeUndefinedValues: true }
       ),
     });
+
     console.log("Item added:", res);
+
     return {
       statusCode: 200,
       body: JSON.stringify({
@@ -24,8 +28,9 @@ module.exports.createFamily = async (event) => {
     };
   } catch (e) {
     console.error("Error:", e);
+
     return {
-      statusCode: 400,
+      statusCode: 500,
       body: JSON.stringify({
         message: "Error adding item",
       }),

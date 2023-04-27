@@ -6,13 +6,13 @@
     "test": "mocha"
   },
   "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
     "serverless-offline": "^12.0.4"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.316.0",
+    "@aws-sdk/lib-dynamodb": "^3.321.1",
     "@aws-sdk/util-dynamodb": "^3.316.0",
-    "aws-sdk": "^2.1361.0",
-    "awscred": "^1.5.0",
-    "serverless-dynamodb-local": "^0.2.40"
+    "aws-sdk": "^2.1361.0"
   }
 }
