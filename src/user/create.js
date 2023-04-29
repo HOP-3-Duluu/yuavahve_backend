@@ -2,16 +2,16 @@ const { marshall } = require("@aws-sdk/util-dynamodb");
 const db = require("../library/dynamodb");
 const { v4: uuidv4 } = require("uuid");
 
-module.exports.createFamily = async (event) => {
+module.exports.createUser = async (event) => {
   const id = uuidv4();
 
   try {
     const res = await db.putItem({
-      TableName: "familyTable",
+      TableName: "usersTable",
       Item: marshall(
         {
           id: id,
-          name: event.queryStringParameters?.name,
+          username: event.queryStringParameters?.username,
         },
         { removeUndefinedValues: true }
       ),

@@ -14,17 +14,23 @@ provider:
           Resource: "*"
 
 functions:
+  createFamily:
+    handler: src/family/create.createFamily
+    events:
+      - httpApi:
+          path: /family/create
+          method: post
   joinFamily:
     handler: src/family/join.joinFamily
     events:
       - httpApi:
           path: /family/{id}
           method: get
-  createFamily:
-    handler: src/family/create.createFamily
+  createUser:
+    handler: src/user/create.createUser
     events:
       - httpApi:
-          path: /family/create
+          path: /user/create
           method: post
 
 resources:
@@ -36,31 +42,25 @@ resources:
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
-          - AttributeName: name
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: usersTable
+        AttributeDefinitions:
+          - AttributeName: id
             AttributeType: S
         KeySchema:
           - AttributeName: id
             KeyType: HASH
-          - AttributeName: name
-            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-
-custom:
-  tableName: familyTable
-  dynamodb:
-    stages:
-      - dev
-    start:
-      port: 8000
-      inMemory: true
-      heapInitial: 200m
-      migrate: true
-    migration:
-      dir: offline/migrations
-    serverless-offline:
-      resourceRoutes: true
 
 plugins:
   - serverless-offline

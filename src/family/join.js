@@ -17,7 +17,7 @@ module.exports.joinFamily = async (event) => {
     };
   } catch (e) {
     return {
-      statusCode: 400,
+      statusCode: 500,
       body: JSON.stringify({
         message: "unsupported",
       }),
