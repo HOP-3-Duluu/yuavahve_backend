@@ -32,6 +32,12 @@ functions:
       - httpApi:
           path: /user/create
           method: post
+  getUser:
+    handler: src/user/get.getUser
+    events:
+      - httpApi:
+          path: /user/{id}
+          method: get
 
 resources:
   Resources:
