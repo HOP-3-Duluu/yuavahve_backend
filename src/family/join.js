@@ -3,23 +3,31 @@ const db = require("../library/dynamodb");
 
 module.exports.joinFamily = async (event) => {
   try {
-    const { Item: item } = await db.getItem({
+    const res = await db.updateItem({
       TableName: "familyTable",
-      Key: marshall(
-        { id: event.pathParameters.id },
-        { removeUndefinedValues: true }
-      ),
+      key: { id: event.queryStringParameters?.id },
+      UpdateExpression:
+        "set #members = list_append(if_not_exists(#members, :empty_list), :userId)",
+      ExpressionAttributeNames: {
+        "#members": "members",
+      },
+      ExpressionAttributeValues: {
+        ":userId": [event.queryStringParameters?.userId],
+        ":empty_list": [],
+      },
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify(item),
+      body: JSON.stringify({
+        message: `Item added ${JSON.stringify(res)}`,
+      }),
     };
   } catch (e) {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: "unsupported",
+        message: JSON.stringify(e),
       }),
     };
   }
