@@ -38,6 +38,12 @@ functions:
       - httpApi:
           path: /user/{id}
           method: get
+  createProduct:
+    handler: src/product/create.createProduct
+    events:
+      - httpApi:
+          path: /product/create
+          method: post
 
 resources:
   Resources:
@@ -64,6 +70,23 @@ resources:
         KeySchema:
           - AttributeName: id
             KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+    productTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: productTable
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+          - AttributeName: familyId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+          - AttributeName: familyId
+            KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
