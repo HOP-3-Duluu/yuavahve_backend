@@ -44,6 +44,12 @@ functions:
       - httpApi:
           path: /product/create
           method: post
+  getProduct:
+    handler: src/product/get.getProduct
+    events:
+      - httpApi:
+          path: /product/{id}
+          method: get
 
 resources:
   Resources:

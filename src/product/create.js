@@ -2,7 +2,7 @@ const { marshall } = require("@aws-sdk/util-dynamodb");
 const db = require("../library/dynamodb");
 const { v4: uuidv4 } = require("uuid");
 
-module.exports.createFamily = async (event) => {
+module.exports.createProduct = async (event) => {
   const id = uuidv4();
 
   try {
@@ -12,7 +12,7 @@ module.exports.createFamily = async (event) => {
         {
           id: id,
           familyId: event.queryStringParameters?.familyId,
-          name: event.queryStringParameters?.name,
+          productName: event.queryStringParameters?.productName,
         },
         { removeUndefinedValues: true }
       ),
