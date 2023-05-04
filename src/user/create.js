@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 module.exports.createUser = async (event) => {
   const id = uuidv4();
+  const date = new Date();
 
   try {
     const res = await db.putItem({
@@ -12,6 +13,8 @@ module.exports.createUser = async (event) => {
         {
           id: id,
           username: event.queryStringParameters?.username,
+          birthday: event.queryStringParameters?.birthday,
+          createdAt: date.getTime(),
         },
         { removeUndefinedValues: true }
       ),

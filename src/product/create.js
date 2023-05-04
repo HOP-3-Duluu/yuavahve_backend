@@ -16,6 +16,11 @@ module.exports.createProduct = async (event) => {
           productName: event.queryStringParameters?.productName,
           createdAt: date.getTime(),
           category: event.queryStringParameters?.category,
+          creatorId: event.queryStringParameters?.creatorId,
+          buyerId: event.queryStringParameters?.buyerId,
+          price: event.queryStringParameters?.buyerId,
+          amount: event.queryStringParameters?.amount,
+          message: event.queryStringParameters?.message,
         },
         { removeUndefinedValues: true }
       ),
