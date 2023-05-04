@@ -93,6 +93,16 @@ resources:
             KeyType: HASH
           - AttributeName: familyId
             KeyType: RANGE
+        GlobalSecondaryIndexes:
+          - IndexName: productTableIndex
+            KeySchema:
+              - AttributeName: familyId
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1

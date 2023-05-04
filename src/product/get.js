@@ -3,18 +3,13 @@ const db = require("../library/dynamodb");
 
 module.exports.getProduct = async (event) => {
   try {
-    const res = await db
-      .query({
-        TableName: "productTable",
-        KeyConditionExpression: "#fi = :familyId",
-        ExpressionAttributeNames: {
-          "#fi": "familyId",
-        },
-        ExpressionAttributeValues: marshall({
-          ":familyId": event.pathParameters.id,
-        }),
-      })
-      .promise();
+    const res = await db.query({
+      TableName: "productTable",
+      KeyConditionExpression: "familyId = :familyId",
+      ExpressionAttributeValues: marshall({
+        ":familyId": event.pathParameters.id,
+      }),
+    });
 
     return {
       statusCode: 200,

@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 
 module.exports.createProduct = async (event) => {
   const id = uuidv4();
+  const date = new Date();
 
   try {
     const res = await db.putItem({
@@ -13,6 +14,8 @@ module.exports.createProduct = async (event) => {
           id: id,
           familyId: event.queryStringParameters?.familyId,
           productName: event.queryStringParameters?.productName,
+          createdAt: date.getTime(),
+          category: event.queryStringParameters?.category,
         },
         { removeUndefinedValues: true }
       ),
