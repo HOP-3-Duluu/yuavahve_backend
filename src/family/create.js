@@ -11,7 +11,7 @@ module.exports.createFamily = async (event) => {
       TableName: "familyTable",
       Item: marshall(
         {
-          id: id,
+          familyId: id,
           createdAt: date.getTime(),
           familyName: event.queryStringParameters?.familyName,
           members: [event.queryStringParameters?.creatorId],

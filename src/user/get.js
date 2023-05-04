@@ -6,7 +6,7 @@ module.exports.getUser = async (event) => {
     const { Item: item } = await db.getItem({
       TableName: "usersTable",
       Key: marshall(
-        { id: event.pathParameters.id },
+        { userId: event.pathParameters.userId },
         { removeUndefinedValues: true }
       ),
     });

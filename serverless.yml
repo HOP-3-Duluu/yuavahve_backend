@@ -64,10 +64,10 @@ resources:
       Properties:
         TableName: familyTable
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: familyId
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: familyId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
@@ -77,10 +77,10 @@ resources:
       Properties:
         TableName: usersTable
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: userId
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: userId
             KeyType: HASH
         ProvisionedThroughput:
           ReadCapacityUnits: 1
@@ -90,12 +90,12 @@ resources:
       Properties:
         TableName: productTable
         AttributeDefinitions:
-          - AttributeName: id
+          - AttributeName: productId
             AttributeType: S
           - AttributeName: familyId
             AttributeType: S
         KeySchema:
-          - AttributeName: id
+          - AttributeName: productId
             KeyType: HASH
           - AttributeName: familyId
             KeyType: RANGE

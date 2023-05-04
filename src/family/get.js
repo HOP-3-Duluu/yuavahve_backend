@@ -6,7 +6,7 @@ module.exports.getFamily = async (event) => {
     const { Item: item } = await db.getItem({
       TableName: "familyTable",
       Key: marshall(
-        { id: event.pathParameters.id },
+        { familyId: event.pathParameters.familyId },
         { removeUndefinedValues: true }
       ),
     });
