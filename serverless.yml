@@ -20,12 +20,18 @@ functions:
       - httpApi:
           path: /family/create
           method: post
-  joinFamily:
-    handler: src/family/join.joinFamily
+  getFamily:
+    handler: src/family/get.getFamily
     events:
       - httpApi:
           path: /family/{id}
           method: get
+  joinFamily:
+    handler: src/family/join.joinFamily
+    events:
+      - httpApi:
+          path: /family/join
+          method: post
   createUser:
     handler: src/user/create.createUser
     events:

@@ -14,6 +14,7 @@ module.exports.createFamily = async (event) => {
           id: id,
           name: event.queryStringParameters?.name,
           createdAt: date.getTime(),
+          members: [event.queryStringParameters?.userId],
         },
         { removeUndefinedValues: true }
       ),
