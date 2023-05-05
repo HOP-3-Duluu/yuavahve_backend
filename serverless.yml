@@ -30,7 +30,7 @@ functions:
     handler: src/family/join.joinFamily
     events:
       - httpApi:
-          path: /family/join
+          path: /family/{id}
           method: post
   createUser:
     handler: src/user/create.createUser

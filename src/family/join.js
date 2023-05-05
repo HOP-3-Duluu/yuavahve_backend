@@ -5,13 +5,13 @@ module.exports.joinFamily = async (event) => {
   try {
     const res = await db.updateItem({
       TableName: "familyTable",
-      Key: { familyId: event.queryStringParameters?.familyId },
+      Key: { familyId: event.pathParameters.id },
       UpdateExpression: "set #members = list_append(#members, :userId)",
       ExpressionAttributeNames: {
         "#members": "members",
       },
       ExpressionAttributeValues: marshall({
-        ":userId": [event.queryStringParameters?.userId],
+        ":userId": event.queryStringParameters?.userId,
       }),
     });
 
