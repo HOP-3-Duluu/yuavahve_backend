@@ -6,12 +6,14 @@ module.exports.joinFamily = async (event) => {
     const res = await db.updateItem({
       TableName: "familyTable",
       Key: { familyId: event.pathParameters.id },
-      UpdateExpression: "set #members = list_append(#members, :userId)",
+      UpdateExpression:
+        "set #members = list_append(if_not_exists(#members, :emptyList), :userId)",
       ExpressionAttributeNames: {
         "#members": "members",
       },
       ExpressionAttributeValues: marshall({
-        ":userId": event.queryStringParameters?.userId,
+        ":userId": [event.queryStringParameters?.userId],
+        ":emptyList": [],
       }),
     });
 
@@ -22,6 +24,7 @@ module.exports.joinFamily = async (event) => {
       }),
     };
   } catch (e) {
+    console.log(e);
     return {
       statusCode: 500,
       body: JSON.stringify({
