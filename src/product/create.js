@@ -11,7 +11,7 @@ module.exports.createProduct = async (event) => {
       TableName: "productTable",
       Item: marshall(
         {
-          id: id,
+          productId: id,
           familyId: event.queryStringParameters?.familyId,
           productName: event.queryStringParameters?.productName,
           createdAt: date.getTime(),

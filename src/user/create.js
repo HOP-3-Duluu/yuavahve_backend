@@ -11,7 +11,7 @@ module.exports.createUser = async (event) => {
       TableName: "usersTable",
       Item: marshall(
         {
-          id: id,
+          userId: id,
           username: event.queryStringParameters?.username,
           birthday: event.queryStringParameters?.birthday,
           createdAt: date.getTime(),
