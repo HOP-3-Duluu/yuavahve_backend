@@ -15,6 +15,7 @@ module.exports.joinFamily = async (event) => {
         ":userId": [event.queryStringParameters?.userId],
         ":emptyList": [],
       }),
+      ReturnValues: "UPDATED_NEW",
     });
 
     return {
