@@ -5,7 +5,7 @@ module.exports.joinFamily = async (event) => {
   try {
     const res = await db.updateItem({
       TableName: "familyTable",
-      Key: { familyId: event.pathParameters.id },
+      Key: marshall({ familyId: event.pathParameters.id }),
       UpdateExpression:
         "set #members = list_append(if_not_exists(#members, :emptyList), :userId)",
       ExpressionAttributeNames: {
