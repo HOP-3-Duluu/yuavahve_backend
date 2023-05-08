@@ -8,7 +8,7 @@ module.exports.getProduct = async (event) => {
       IndexName: "productTableIndex",
       KeyConditionExpression: "familyId = :familyId",
       ExpressionAttributeValues: marshall({
-        ":familyId": event.pathParameters.familyId,
+        ":familyId": event.pathParameters.id,
       }),
     });
 

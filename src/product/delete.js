@@ -1,18 +1,21 @@
 const { marshall } = require("@aws-sdk/util-dynamodb");
 const db = require("../library/dynamodb");
 
-module.exports.getFamily = async (event) => {
+module.exports.deleteProduct = async (event) => {
   try {
-    const { Item: item } = await db.getItem({
-      TableName: "familyTable",
-      Key: marshall({ familyId: event.pathParameters.id }),
+    const res = await db.deleteItem({
+      TableName: "productTable",
+      Key: marshall({
+        productId: event.queryStringParameters?.productId,
+      }),
     });
 
     return {
       statusCode: 200,
-      body: JSON.stringify(item),
+      body: JSON.stringify(res),
     };
   } catch (e) {
+    console.log(e);
     return {
       statusCode: 500,
       body: JSON.stringify({

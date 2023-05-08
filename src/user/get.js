@@ -5,10 +5,7 @@ module.exports.getUser = async (event) => {
   try {
     const { Item: item } = await db.getItem({
       TableName: "usersTable",
-      Key: marshall(
-        { userId: event.pathParameters.userId },
-        { removeUndefinedValues: true }
-      ),
+      Key: marshall({ userId: event.pathParameters.id }),
     });
 
     return {
@@ -19,7 +16,7 @@ module.exports.getUser = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: "unsupported",
+        message: JSON.stringify(e),
       }),
     };
   }

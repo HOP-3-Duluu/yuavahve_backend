@@ -62,6 +62,12 @@ functions:
       - httpApi:
           path: /product/{id}
           method: get
+  deleteProduct:
+    handler: src/product/delete.deleteProduct
+    events:
+      - httpApi:
+          path: /product/delete
+          method: delete
 
 resources:
   Resources:
