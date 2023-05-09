@@ -6,7 +6,8 @@ module.exports.deleteProduct = async (event) => {
     const res = await db.deleteItem({
       TableName: "productTable",
       Key: marshall({
-        productId: event.queryStringParameters?.productId,
+        productId: event.queryStringParameters.productId,
+        familyId: event.queryStringParameters.familyId,
       }),
     });
 

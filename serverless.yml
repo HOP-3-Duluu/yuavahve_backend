@@ -82,8 +82,8 @@ resources:
           - AttributeName: familyId
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
     usersTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -95,8 +95,8 @@ resources:
           - AttributeName: userId
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
     productTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -119,12 +119,11 @@ resources:
             Projection:
               ProjectionType: ALL
             ProvisionedThroughput:
-              ReadCapacityUnits: 1
-              WriteCapacityUnits: 1
+              ReadCapacityUnits: 10
+              WriteCapacityUnits: 10
         ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
 
 plugins:
   - serverless-offline
-  - serverless-dynamodb-local
