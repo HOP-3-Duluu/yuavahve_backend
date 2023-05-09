@@ -15,7 +15,6 @@ module.exports.deleteFamily = async (event) => {
       body: JSON.stringify(res),
     };
   } catch (e) {
-    console.log(e);
     return {
       statusCode: 500,
       body: JSON.stringify({
