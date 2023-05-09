@@ -1,13 +1,12 @@
 const { marshall } = require("@aws-sdk/util-dynamodb");
 const db = require("../library/dynamodb");
 
-module.exports.deleteProduct = async (event) => {
+module.exports.deleteUser = async (event) => {
   try {
     const res = await db.deleteItem({
-      TableName: "productTable",
+      TableName: "usersTable",
       Key: marshall({
-        productId: event.queryStringParameters.productId,
-        familyId: event.queryStringParameters.familyId,
+        userId: event.queryStringParameters.userId,
       }),
     });
 

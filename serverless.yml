@@ -50,6 +50,12 @@ functions:
       - httpApi:
           path: /user/{id}
           method: get
+  deleteUser:
+    handler: src/user/delete.deleteUser
+    events:
+      - httpApi:
+          path: /user/delete
+          method: delete
   createProduct:
     handler: src/product/create.createProduct
     events:
