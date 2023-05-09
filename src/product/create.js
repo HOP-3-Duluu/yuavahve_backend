@@ -18,7 +18,7 @@ module.exports.createProduct = async (event) => {
           category: event.queryStringParameters?.category,
           creatorId: event.queryStringParameters?.creatorId,
           buyerId: event.queryStringParameters?.buyerId,
-          price: event.queryStringParameters?.buyerId,
+          price: event.queryStringParameters?.price,
           amount: event.queryStringParameters?.amount,
           message: event.queryStringParameters?.message,
         },
