@@ -5,10 +5,7 @@ module.exports.getFamily = async (event) => {
   try {
     const { Item: item } = await db.getItem({
       TableName: "familyTable",
-      Key: marshall(
-        { familyId: event.pathParameters.familyId },
-        { removeUndefinedValues: true }
-      ),
+      Key: marshall({ familyId: event.pathParameters.id }),
     });
 
     return {
@@ -19,7 +16,7 @@ module.exports.getFamily = async (event) => {
     return {
       statusCode: 500,
       body: JSON.stringify({
-        message: "unsupported",
+        message: JSON.stringify(e),
       }),
     };
   }
