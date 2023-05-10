@@ -137,5 +137,12 @@ resources:
           ReadCapacityUnits: 10
           WriteCapacityUnits: 10
 
+custom:
+  dynamodb:
+    ttl:
+      - table: productTable
+        field: ttl
+
 plugins:
   - serverless-offline
+  - serverless-dynamodb-ttl
