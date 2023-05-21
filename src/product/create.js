@@ -5,11 +5,6 @@ const { v4: uuidv4 } = require("uuid");
 module.exports.createProduct = async (event) => {
   const id = uuidv4();
   const date = new Date();
-  const year = date.getFullYear();
-  const month = String(
-    date.getMonth() + 3 > 11 ? date.getMonth() + 3 - 12 : date.getMonth() + 3
-  ).padStart(2, "0");
-  const ttl = new Date(`${year}-${month}`);
 
   try {
     const res = await db.putItem({
@@ -19,8 +14,7 @@ module.exports.createProduct = async (event) => {
           productId: id,
           familyId: event.queryStringParameters?.familyId,
           productName: event.queryStringParameters?.productName,
-          createdAt: date.getTime(),
-          ttl: ttl.getTime(),
+          createdAt: date.toISOString(),
           category: event.queryStringParameters?.category,
           creatorId: event.queryStringParameters?.creatorId,
           buyerId: event.queryStringParameters?.buyerId,
