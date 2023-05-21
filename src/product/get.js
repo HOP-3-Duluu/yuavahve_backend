@@ -2,9 +2,8 @@ const { marshall } = require("@aws-sdk/util-dynamodb");
 const db = require("../library/dynamodb");
 
 module.exports.getProduct = async (event) => {
-  console.log(event.queryStringParameters);
   try {
-    if (event.queryStringParameters?.from !== undefined) {
+    if (event.queryStringParameters !== undefined) {
       const { Items: items } = await db.query({
         TableName: "productTable",
         IndexName: "productTableIndex",
