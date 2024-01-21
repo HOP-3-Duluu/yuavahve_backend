@@ -14,7 +14,7 @@ module.exports.createUser = async (event) => {
           userId: id,
           username: event.queryStringParameters?.username,
           birthday: event.queryStringParameters?.birthday,
-          createdAt: date.getTime(),
+          createdAt: date.toISOString(),
         },
         { removeUndefinedValues: true }
       ),
@@ -23,7 +23,7 @@ module.exports.createUser = async (event) => {
     return {
       statusCode: 200,
       body: JSON.stringify({
-        message: `Item added ${JSON.stringify(res)}`,
+        message: id,
       }),
     };
   } catch (e) {
